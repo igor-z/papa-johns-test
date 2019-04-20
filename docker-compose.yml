@@ -18,5 +18,5 @@ services:
       - ./database:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=secret
-      - MYSQL_DATABASE=smart-media-test
+      - MYSQL_DATABASE=papa-johns-test
 
