@@ -1,5 +1,8 @@
 <?php
 
+use Yandex\Geo\Api;
+use yii\web\UrlRule;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
@@ -15,6 +18,9 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'PoY-lij6zH39h6iG4AumsA34dUEIGstD',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -43,14 +49,26 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'driver',
+                    'except' => ['delete'],
+                    'extraPatterns' => [
+                        'GET {id}/travel-time' => 'travel-time',
+                        'GET travel-time' => 'travel-time',
+                    ],
+                ],
             ],
         ],
-        */
+    ],
+    'container' => [
+        'singletons' => [
+            Api::class,
+        ],
     ],
     'params' => $params,
 ];
