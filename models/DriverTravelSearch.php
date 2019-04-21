@@ -26,6 +26,7 @@ class DriverTravelSearch extends Model
     public function search()
     {
         $query = Driver::find()
+            ->select(['driver.id', 'driver.birth_date', 'driver.name', 'fastestBus.avg_speed'])
             ->joinWith([
                 'driverBuses driverBuses',
             ], false)

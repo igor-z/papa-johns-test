@@ -17,6 +17,8 @@ use Yii;
  */
 class Driver extends \yii\db\ActiveRecord
 {
+    public $avg_speed;
+
     /**
      * {@inheritdoc}
      */
@@ -86,6 +88,7 @@ class Driver extends \yii\db\ActiveRecord
     {
         return [
             'buses',
+            'avg_speed'
         ];
     }
 }

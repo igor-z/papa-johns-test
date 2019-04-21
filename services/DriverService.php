@@ -59,11 +59,9 @@ class DriverService
         $drivers = [];
         /** @var Driver $driver */
         foreach ($dataProvider->getModels() as $driver) {
-            $driver = $driver->toArray([], ['buses']);
+            $driver = $driver->toArray([], ['avg_speed']);
             $driver['travel_distance'] = $this->routeCalculator->calculateDistance($from, $to);
-            foreach ($driver['buses'] as $bus) {
-                $driver['travel_time'] = $driver['travel_distance'] / $bus['avg_speed'];
-            }
+            $driver['travel_time'] = $driver['travel_distance'] / $driver['avg_speed'];
             $drivers[] = $driver;
         }
 
